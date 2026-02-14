@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry!</title>
+    <style>
+        body {
+            background-color: #3d2b1f;
+            color: #ffb7c5;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 40px 10px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 8vw, 3rem);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: clamp(1.2rem, 5vw, 2rem);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+            margin: 40px 0;
+            width: 100%;
+        }
+
+        button {
+            background-color: #5a0000;
+            color: #ffb7c5;
+            border: 2px solid #ffb7c5;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: transform 0.2s ease-in-out;
+            font-family: inherit;
+            font-weight: bold;
+            max-width: 90vw;
+            word-wrap: break-word;
+        }
+
+        img {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+            margin-top: 20px;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        @keyframes shake {
+            0% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-10px);
+            }
+
+            50% {
+                transform: translateX(10px);
+            }
+
+            75% {
+                transform: translateX(-10px);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="page1" class="container">
+        <h1 id="question">Are you still mad at me?</h1>
+        <div class="buttons">
+            <button id="yesBtn" onclick="showPage('page2')">No</button>
+            <button id="noBtn" onclick="shrinkNo()">Yes</button>
+        </div>
+        <img src="WhatsApp Image 2026-02-14 at 11.09.25 PM.jpeg" alt="Sad Ahmed">
+    </div>
+
+    <div id="page2" class="container hidden">
+        <h1>YaaaY!</h1>
+        <h2>Now tell me how much you love me?</h2>
+        <div class="buttons">
+            <button onclick="showPage('page4')">VERY VERY</button>
+            <button onclick="showPage('page3')">HALF HALF</button>
+        </div>
+        <img src="happy.jpeg" alt="Happy Ahmed">
+    </div>
+
+    <div id="page3" class="container hidden">
+        <h1 class="shake">❌ WRONG ANSWER ❌</h1>
+        <p style="font-size: 1.5rem;">That is not an option!</p>
+        <div class="buttons">
+            <button onclick="showPage('page2')">Try again</button>
+        </div>
+        <img src="Liar.jpeg">
+    </div>
+
+    <div id="page4" class="container hidden">
+        <h1>I love you too! ❤️</h1>
+        <p style="font-size: 1.3rem;">Always my beautiful princess</p>
+        <img src="cat-kiss-kiss-cat.gif" alt="Happy Ahmed">
+    </div>
+
+    <script>
+        let yesSize = 1;
+        let noSize = 1;
+
+        function showPage(pageId) {
+            // This selects all main containers and hides them
+            document.querySelectorAll('.container').forEach(div => {
+                div.classList.add('hidden');
+            });
+            // This shows the specific page you clicked
+            document.getElementById(pageId).classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function shrinkNo() {
+            const yesBtn = document.getElementById('yesBtn');
+            const noBtn = document.getElementById('noBtn');
+            const question = document.getElementById('question');
+
+            yesSize += 0.4;
+            noSize -= 0.12;
+
+            yesBtn.style.transform = `scale(${yesSize})`;
+            noBtn.style.transform = `scale(${noSize})`;
+
+
+            if (noSize <= 0.1) {
+                noBtn.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
